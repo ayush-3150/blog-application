@@ -1,10 +1,9 @@
 package com.blog.blogapplication.services.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +19,9 @@ public class UserServiceImp implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
     public UserDto createUser(UserDto userDto) {
         User user = this.dtoToUser(userDto);
@@ -32,7 +34,6 @@ public class UserServiceImp implements UserService {
         User user = this.userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
 
-        user.setId(userDto.getId());
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
@@ -53,7 +54,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public void deleteUser(UserDto userDto, Integer userId) {
+    public void deleteUser(Integer userId) {
 
         User user = this.userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
@@ -68,22 +69,24 @@ public class UserServiceImp implements UserService {
     }
 
     public User dtoToUser(UserDto dto) {
-        User user = new User();
-        user.setId(dto.getId());
-        user.setName(dto.getName());
-        user.setEmail(dto.getEmail());
-        user.setPassword(dto.getPassword());
-        user.setAbout(dto.getAbout());
+        // Using model mapper class to conver UserDto obj to User obj
+        User user = this.modelMapper.map(dto, User.class);
+
+        // user.setId(dto.getId());
+        // user.setName(dto.getName());
+        // user.setEmail(dto.getEmail());
+        // user.setPassword(dto.getPassword());
+        // user.setAbout(dto.getAbout());
         return user;
     }
 
     public UserDto userToDto(User user) {
-        UserDto dto = new UserDto();
-        dto.setId(user.getId());
-        dto.setName(user.getName());
-        dto.setEmail(user.getEmail());
-        dto.setPassword(user.getPassword());
-        dto.setAbout(user.getAbout());
+        UserDto dto = this.modelMapper.map(user, UserDto.class);
+        // dto.setId(user.getId());
+        // dto.setName(user.getName());
+        // dto.setEmail(user.getEmail());
+        // dto.setPassword(user.getPassword());
+        // dto.setAbout(user.getAbout());
         return dto;
     }
 

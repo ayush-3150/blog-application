@@ -2,12 +2,8 @@ package com.blog.blogapplication.services;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-
 import com.blog.blogapplication.payloads.UserDto;
 
-@Service
 public interface UserService {
 
     UserDto createUser(UserDto userDto);
@@ -18,6 +14,6 @@ public interface UserService {
 
     UserDto getUser(Integer userId);
 
-    void deleteUser(UserDto userDto, Integer userId);
+    void deleteUser(Integer userId);
 
 }
