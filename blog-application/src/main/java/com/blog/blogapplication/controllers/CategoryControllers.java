@@ -2,6 +2,8 @@ package com.blog.blogapplication.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.blog.blogapplication.payloads.ApiResponse;
 import com.blog.blogapplication.payloads.CategoryDto;
 import com.blog.blogapplication.services.CategoryService;
 
@@ -25,7 +28,7 @@ public class CategoryControllers {
     private CategoryService categoryService;
 
     @PostMapping("/")
-    public ResponseEntity<CategoryDto> createCategory(@RequestBody CategoryDto categoryDto) {
+    public ResponseEntity<CategoryDto> createCategory(@Valid @RequestBody CategoryDto categoryDto) {
 
         CategoryDto categoryDtoCreated = this.categoryService.createCategory(categoryDto);
         return ResponseEntity.ok().body(categoryDtoCreated);
@@ -46,16 +49,21 @@ public class CategoryControllers {
     }
 
     @PutMapping("/{categoryId}")
-    public ResponseEntity<CategoryDto> getCategory(@RequestBody CategoryDto categoryDto, @PathVariable int categoryId) {
+    public ResponseEntity<CategoryDto> updateCategory(@Valid @RequestBody CategoryDto categoryDto,
+            @PathVariable int categoryId) {
 
         CategoryDto categorUpadated = this.categoryService.updateCategory(categoryDto, categoryId);
         return ResponseEntity.ok().body(categorUpadated);
     }
 
     @DeleteMapping("/{categoryId}")
-    public void deleteCategory(@PathVariable int categoryId) {
+    public ResponseEntity<ApiResponse> deleteCategory(@PathVariable int categoryId) {
 
         this.categoryService.deleteCategory(categoryId);
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.setMessage("Category Deleted succesfully");
+        apiResponse.setSuccess(true);
+        return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.OK);
     }
 
 }

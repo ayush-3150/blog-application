@@ -26,7 +26,6 @@ public class CategoryServiceImp implements CategoryService {
     public CategoryDto createCategory(CategoryDto categoryDto) {
         Category category = this.modelMapper.map(categoryDto, Category.class);
         Category createdCategory = this.categoryRepository.save(category);
-
         return this.modelMapper.map(createdCategory, CategoryDto.class);
     }
 
