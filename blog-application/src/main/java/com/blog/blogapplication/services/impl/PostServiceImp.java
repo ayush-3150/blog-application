@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 @Service
 public class PostServiceImp implements PostService {
@@ -76,9 +77,12 @@ public class PostServiceImp implements PostService {
         }
 
         @Override
-        public PostResponse getAllPost(int pageNo, int pageSize) {
+        public PostResponse getAllPost(int pageNo, int pageSize, String sortBy, String sortDir) {
 
-                PageRequest p = PageRequest.of(pageNo, pageSize);
+                Sort s = (sortDir.equalsIgnoreCase("asc")) ? Sort.by(sortBy).ascending()
+                                : Sort.by(sortBy).ascending().descending();
+
+                PageRequest p = PageRequest.of(pageNo, pageSize, s);
                 Page<Post> pagePost = this.postRepository.findAll(p);
                 List<PostDto> allPosts = pagePost.getContent().stream()
                                 .map((post) -> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());

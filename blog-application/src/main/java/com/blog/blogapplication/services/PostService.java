@@ -15,7 +15,7 @@ public interface PostService {
 
     public PostDto getPost(int id);
 
-    public PostResponse getAllPost(int pageNo, int pageSize);
+    public PostResponse getAllPost(int pageNo, int pageSize,String sortBy,String sortDir);
 
     public void deletePost(int id);
 
