@@ -2,14 +2,9 @@ package com.blog.blogapplication.payloads;
 
 import java.util.Date;
 
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.blog.blogapplication.models.Category;
-import com.blog.blogapplication.models.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
