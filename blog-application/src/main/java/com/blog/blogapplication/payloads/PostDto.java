@@ -14,6 +14,8 @@ import lombok.Setter;
 @Setter
 public class PostDto {
 
+    private int postId;
+
     @NotBlank(message = "Content should not be blank")
     @Size(max = 10000, message = "Content size should not be greater than 10000 character")
     private String content;

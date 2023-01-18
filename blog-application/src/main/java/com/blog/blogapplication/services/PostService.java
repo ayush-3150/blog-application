@@ -6,6 +6,7 @@ import com.blog.blogapplication.models.Category;
 import com.blog.blogapplication.models.Post;
 import com.blog.blogapplication.models.User;
 import com.blog.blogapplication.payloads.PostDto;
+import com.blog.blogapplication.payloads.PostResponse;
 
 public interface PostService {
     public PostDto createPost(PostDto postDto, int userId, int categoryId);
@@ -14,7 +15,7 @@ public interface PostService {
 
     public PostDto getPost(int id);
 
-    public List<PostDto> getAllPost();
+    public PostResponse getAllPost(int pageNo, int pageSize);
 
     public void deletePost(int id);
 
