@@ -1,5 +1,7 @@
 package com.blog.blogapplication.payloads;
 
+import java.util.List;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -28,4 +30,6 @@ public class UserDto {
     // @Pattern(regexp
     // ="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$")
     private String about;
+    private List<CommentDto> comments;
+    // private List<PostDto> posts;
 }

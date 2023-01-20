@@ -1,9 +1,12 @@
 package com.blog.blogapplication.payloads;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.blog.blogapplication.models.Comment;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,4 +30,6 @@ public class PostDto {
     private CategoryDto category;
 
     private UserDto user;
+
+    private List<CommentDto> comments;
 }

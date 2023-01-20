@@ -64,6 +64,7 @@ public class PostServiceImp implements PostService {
                                 .orElseThrow(() -> new ResourceNotFoundException("Post", "id", postId));
                 post.setTitle(postDto.getTitle());
                 post.setContent(postDto.getContent());
+                post.setImageUrl(postDto.getImageUrl());
 
                 Post updatedPost = this.postRepository.save(post);
                 return this.modelMapper.map(updatedPost, PostDto.class);
