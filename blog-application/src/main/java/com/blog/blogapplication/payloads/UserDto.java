@@ -1,10 +1,14 @@
 package com.blog.blogapplication.payloads;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import com.blog.blogapplication.models.Role;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,5 +35,6 @@ public class UserDto {
     // ="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$")
     private String about;
     private List<CommentDto> comments;
+    private Set<RoleDto> roles=new HashSet<>();
     // private List<PostDto> posts;
 }
